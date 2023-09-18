@@ -13,6 +13,8 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 
+**Address:** 134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh.
+
 ## About
 
 Thai the KNOT Asian Kitchen is a full-stack restaurant project that brings the delightful flavors of Thai and Asian cuisine to your fingertips. Whether you're craving Pad Thai, sushi, or a delectable curry, we have you covered. Our user-friendly platform allows you to explore our menu, place orders, make reservations, and experience the essence of Asian culinary artistry.
