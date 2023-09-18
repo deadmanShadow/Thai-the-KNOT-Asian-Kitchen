@@ -1,32 +1,20 @@
-import { useState } from "react";
+
+import { Link } from "react-router-dom";
 
 
 const NavBar = () => {
-    // State to track whether the submenu is open
-    const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-
-    // Function to toggle the submenu
-    const toggleSubMenu = () => {
-        setIsSubMenuOpen(!isSubMenuOpen);
-    };
 
     const navOptions = (
         <>
-            <li><a>Item 1</a></li>
-            <li className={`dropdown ${isSubMenuOpen ? 'open' : ''}`}>
-                <a onClick={toggleSubMenu}>Parent</a>
-                <ul className={`p-2 ${isSubMenuOpen ? 'block' : 'hidden'}`}>
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                </ul>
-            </li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/menu">Our Menu</Link></li>
             <li><a>Item 3</a></li>
         </>
     );
 
     return (
         <>
-            <div className="navbar fixed max-w-screen-xl z-10 bg-opacity-30 bg-black text-white">
+            <div className="navbar fixed max-w-screen-xl z-10 bg-black  bg-opacity-30  text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -36,7 +24,7 @@ const NavBar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Thai the KNOT Asian Kitchen</a>
+                    <Link to='/' className="btn btn-ghost normal-case text-xl">Thai the KNOT Asian Kitchen</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -44,8 +32,8 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end flex">
-                    <a className="btn">Login</a>
-                    <a className="btn ms-2">Register</a>
+                    <a className="btn btn-outline btn-primary">Login</a>
+                    <a className="btn btn-outline btn-accent ms-2">Register</a>
                 </div>
             </div>
         </>

@@ -1,4 +1,4 @@
-// MenuItem.jsx
+
 const MenuItem = ({ item }) => {
     const { name, image, price, recipe } = item;
 
