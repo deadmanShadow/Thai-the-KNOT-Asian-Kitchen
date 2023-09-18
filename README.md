@@ -3,7 +3,8 @@
 ![Thai the KNOT Asian Kitchen](/src/assets/readme.png)
 
 **Welcome to Thai the KNOT Asian Kitchen !**
-**Address:** 134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh.
+
+- Address: 134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh.
 
 **Table of Contents**
 - [About](#about)
