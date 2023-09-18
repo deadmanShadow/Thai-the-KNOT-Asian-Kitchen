@@ -14,6 +14,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [License](#license)
 
 
 ## About
@@ -70,3 +71,5 @@ Detailed installation instructions for both the frontend and backend can be foun
 ## Contributing
 
 We welcome contributions from the community to enhance Thai the KNOT Asian Kitchen. If you have suggestions, bug reports, or would like to contribute code, please check out our [Contribution Guidelines](CONTRIBUTING.md).
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
