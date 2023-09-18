@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 const NavBar = () => {
     // State to track whether the submenu is open
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -25,7 +26,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div className="navbar bg-base-100">
+            <div className="navbar fixed max-w-screen-xl z-10 bg-opacity-30 bg-black text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -42,8 +43,9 @@ const NavBar = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                <div className="navbar-end flex">
+                    <a className="btn">Login</a>
+                    <a className="btn ms-2">Register</a>
                 </div>
             </div>
         </>
