@@ -9,7 +9,8 @@ const Footer = () => {
                 <aside>
                     <img height={50} width={50} src={logo} alt="" />
                     <p>Thai the KNOT Asian Kitchen Ltd.<br />Your Happiness Our Ambitions!!</p>
-                    <p className="text-sm">134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh</p>
+                    <p className="text-sm">134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh.<br />
+                    Mobile: 01300000007,01300000008</p>
                 </aside>
                 <nav>
                     <header className="footer-title">Social</header>

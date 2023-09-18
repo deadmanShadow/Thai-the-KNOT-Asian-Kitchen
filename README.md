@@ -1,10 +1,10 @@
-# Thai the KNOT Asian Kitchen
+# Welcome!
 
 ![Thai the KNOT Asian Kitchen](/src/assets/readme.png)
 
-**Welcome to Thai the KNOT Asian Kitchen !**
+*Welcome to Thai the KNOT Asian Kitchen!*
 
-**Address: 134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh.**
+
 
 **Table of Contents**
 - [About](#about)
@@ -15,6 +15,7 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+- [Address](#address)
 
 
 ## About
@@ -72,4 +73,14 @@ Detailed installation instructions for both the frontend and backend can be foun
 
 We welcome contributions from the community to enhance Thai the KNOT Asian Kitchen. If you have suggestions, bug reports, or would like to contribute code, please check out our [Contribution Guidelines](CONTRIBUTING.md).
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+
+## Address
+
+134, Road: 12, Block: E, Banani, Dhaka 1213, Bangladesh. 
+
+Mobile: 01300000007,01300000008
+
