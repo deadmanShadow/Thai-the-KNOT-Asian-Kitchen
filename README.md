@@ -2,10 +2,6 @@
 
 ![Thai the KNOT Asian Kitchen](/src/assets/readme.png)
 
-*Welcome to Thai the KNOT Asian Kitchen!*
-
-
-
 **Table of Contents**
 - [About](#about)
 - [Features](#features)
