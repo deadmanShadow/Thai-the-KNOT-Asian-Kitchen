@@ -30,8 +30,8 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex">
-                <a className="btn btn-outline btn-primary">Login</a>
-                <a className="btn btn-outline btn-accent ms-2">Register</a>
+                <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                <Link className="btn btn-outline btn-accent ms-2">Register</Link>
             </div>
         </div>
     );
