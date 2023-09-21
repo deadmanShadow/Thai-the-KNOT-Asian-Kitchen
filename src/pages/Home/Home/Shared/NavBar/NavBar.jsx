@@ -30,7 +30,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex">
-                <Link to="/login" className="btn btn-outline btn-primary">Login</Link>
+                <Link to="/login" className="btn btn-neutral">Login</Link>
                 <Link to="/signup" className="btn btn-outline btn-accent ms-2">Register</Link>
             </div>
         </div>
