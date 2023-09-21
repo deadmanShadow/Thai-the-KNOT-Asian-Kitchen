@@ -7,6 +7,7 @@ import {
 } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
 
@@ -50,6 +51,10 @@ const Login = () => {
 
 
     return (
+       <>
+       <Helmet>
+        <title>KNOT | LOGIN</title>
+       </Helmet>
         <div className="flex max-w-7xl h-screen items-center mx-auto">
             <div className="w-1/2">
                 <img src={loginImage} className="h-full w-full" alt="" />
@@ -105,6 +110,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
+       </>
     );
 };
 
