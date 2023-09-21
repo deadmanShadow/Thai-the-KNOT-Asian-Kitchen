@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import loginImage from '../../assets/login.svg';
 import {
     loadCaptchaEnginge,
     LoadCanvasTemplate,
     validateCaptcha
 } from 'react-simple-captcha';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+    const { signIn } = useContext(AuthContext);
+
+
     useEffect(() => {
         loadCaptchaEnginge(6); // Initialize the reCAPTCHA engine with 6 characters
     }, []);
@@ -20,6 +26,11 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         const captchaValue = form.captcha.value;
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
 
         // Validate the captcha
         if (!validateCaptcha(captchaValue)) {
@@ -35,9 +46,8 @@ const Login = () => {
         console.log('Email:', email);
         console.log('Password:', password);
         console.log('Captcha:', captchaValue);
-
-        // Continue with your login logic here
     };
+
 
     return (
         <div className="flex max-w-7xl h-screen items-center mx-auto">
@@ -87,7 +97,9 @@ const Login = () => {
                             </button>
                         </div>
                         <div>
-                            <p>Don't have an account? </p>
+                            <p>Don't have an account? 
+                                <Link className='text-primary hover:underline cursor-pointer' to="/signup"> Create an account</Link>
+                            </p>
                         </div>
                     </form>
                 </div>
