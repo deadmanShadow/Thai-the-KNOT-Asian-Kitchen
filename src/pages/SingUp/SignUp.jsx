@@ -3,28 +3,43 @@ import signImage from '../../assets/singup.jpg'
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, getValues } = useForm();
 
-    const {createUser} = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
 
+    const navigate = useNavigate();
 
     const onSubmit = data => {
         console.log(data);
         createUser(data.email, data.password)
-        .then(result => {
-            const loggedUser = result.user;
-            console.log(loggedUser);
-        })
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                updateUserProfile(data.name)
+                    .then(() => {
+                        console.log('User Profile Info Updated');
+                        reset();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'User Created Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate('/login');
+                    })
+                    .catch(error => console.log(error));
+            });
     };
 
     return (
         <>
             <Helmet>
-             <title>KNOT | SIGN</title>
+                <title>KNOT | SIGN</title>
             </Helmet>
 
             <div className="flex max-w-7xl mx-auto h-screen items-center">
@@ -69,11 +84,16 @@ const SignUp = () => {
                             <div className="flex flex-col items-start">
                                 <label htmlFor="confirm-password">Confirm Password</label>
                                 <input
-                                    type="password" f
+                                    type="password"
                                     id="confirm-password"
                                     className="w-full rounded-md"
+                                    {...register("confirmPassword", {
+                                        required: true,
+                                        validate: value =>
+                                            value === getValues("password") || "Passwords do not match"
+                                    })}
                                 />
-
+                                {errors.confirmPassword && <span className='text-red-600'>Passwords do not match</span>}
                             </div>
                             <div className="!mt-8 ">
                                 <button
@@ -89,7 +109,7 @@ const SignUp = () => {
                                     <Link to="/login"
                                         className="text-primary hover:underline cursor-pointer"
                                     >
-                                       Login Now
+                                        Login Now
                                     </Link>
                                 </p>
                             </div>

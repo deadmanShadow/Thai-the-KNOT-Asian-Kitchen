@@ -8,7 +8,7 @@ const NavBar = () => {
 
     const handleLogOut = () => {
         logOut()
-            .then(() => {})
+            .then(() => { })
             .catch(error => console.log(error));
     };
 
@@ -40,7 +40,10 @@ const NavBar = () => {
             </div>
             <div className="navbar-end flex">
                 {user ? (
-                    <button onClick={handleLogOut} className="btn btn-outline btn-error">Logout</button>
+                    <div className="user-info flex items-center space-x-4">
+                        <span className="text-green-500 font-semibold">{user?.displayName}</span>
+                        <button onClick={handleLogOut} className="btn btn-outline btn-error">Logout</button>
+                    </div>
                 ) : (
                     <>
                         <Link to="/login" className="btn btn-neutral">Login</Link>
