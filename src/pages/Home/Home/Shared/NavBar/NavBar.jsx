@@ -8,11 +8,11 @@ const NavBar = () => {
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(error => console.log(error));
+            .then(() => {})
+            .catch(error => console.log(error));
     };
 
-    return(
+    return (
         <div className="fixed navbar max-w-screen-xl z-10 bg-black bg-opacity-70 text-white">
             <div className="navbar-start">
                 <div className="dropdown">
@@ -22,6 +22,9 @@ const NavBar = () => {
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to="/menu">Our Menu</Link></li>
                         <li><Link to="/order">Order Food</Link></li>
+                        {user && (
+                            <button onClick={handleLogOut} className="btn btn-outline btn-error">Logout</button>
+                        )}
                     </ul>
                 </div>
                 <Link to='/' className="logo-link">
@@ -35,8 +38,14 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex">
-                <Link to="/login" className="btn btn-neutral">Login</Link>
-                <Link to="/signup" className="btn btn-outline btn-accent ms-2">Register</Link>
+                {user ? (
+                    <button onClick={handleLogOut} className="btn btn-outline btn-error">Logout</button>
+                ) : (
+                    <>
+                        <Link to="/login" className="btn btn-neutral">Login</Link>
+                        <Link to="/signup" className="btn btn-outline btn-accent ms-2">Register</Link>
+                    </>
+                )}
             </div>
         </div>
     );
