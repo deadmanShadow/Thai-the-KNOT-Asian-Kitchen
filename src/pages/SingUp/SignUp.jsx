@@ -3,6 +3,7 @@ import signImage from '../../assets/singup.jpg'
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -85,11 +86,11 @@ const SignUp = () => {
                             <div>
                                 <p>
                                     Already have an account?{' '}
-                                    <span
+                                    <Link to="/login"
                                         className="text-primary hover:underline cursor-pointer"
                                     >
-                                        Login Now
-                                    </span>
+                                       Login Now
+                                    </Link>
                                 </p>
                             </div>
                         </form>

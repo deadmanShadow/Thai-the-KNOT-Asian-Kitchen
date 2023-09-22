@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import loginImage from '../../assets/login.svg';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useNavigationType } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 
 
 const Login = () => {
-
     const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate(); // Corrected usage
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -19,20 +21,24 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-            })
-        // sweet alert
+            });
+
+        // Sweet alert
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Logged In Successfully',
-            showConfirmButton: false,
-            timer: 1500
-        })
+            title: 'User Login Successful',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+
+        // Use the correct navigate function
+        navigate(from, { replace: true });
         console.log('Email:', email);
         console.log('Password:', password);
-        console.log('Captcha:', captchaValue);
     };
-
     return (
         <>
             <Helmet>
