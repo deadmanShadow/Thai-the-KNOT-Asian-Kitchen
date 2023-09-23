@@ -3,14 +3,28 @@ import logoImg from '../../../../../assets/logoImg.png'
 import { useContext } from "react";
 import { AuthContext } from "../../../../../Providers/AuthProvider";
 import { FaShoppingCart } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
-        logOut()
-            .then(() => { })
-            .catch(error => console.log(error));
+        Swal.fire({
+            title: 'Logout',
+            text: 'Are you sure you want to logout?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user confirms, log out
+                logOut()
+                    .then(() => { })
+                    .catch(error => console.log(error));
+            }
+        });
     };
 
     return (
@@ -65,4 +79,5 @@ const NavBar = () => {
         </div>
     );
 };
+
 export default NavBar;
