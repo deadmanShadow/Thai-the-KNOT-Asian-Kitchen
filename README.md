@@ -36,7 +36,7 @@ https://github.com/thatUltimateJSDev/Thai-the-KNOT-Asian-Kitchen
 
 
 2. **Set Up the Backend:**
-- Navigate to the backend directory and follow the setup instructions there.
+- Backend Repo here: https://github.com/thatUltimateJSDev/backend-Thai-the-KNOT-Kitchen
 
 3. **Set Up the Frontend:**
 - Navigate to the frontend directory and follow the setup instructions there.
