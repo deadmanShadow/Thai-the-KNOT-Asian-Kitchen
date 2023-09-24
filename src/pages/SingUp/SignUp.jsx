@@ -1,124 +1,131 @@
-import { useForm } from 'react-hook-form';
-import signImage from '../../assets/singup.jpg'
-import { Helmet } from 'react-helmet-async';
-import { useContext } from 'react';
-import { AuthContext } from '../../Providers/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Home/Home/Shared/SocialLogin/SocialLogin";
+import signUpImg from '../../assets/signUp.svg';
 
 const SignUp = () => {
-    const { register, handleSubmit, reset, formState: { errors }, getValues } = useForm();
 
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const onSubmit = data => {
 
-    const onSubmit = data => {
-        console.log(data);
-        createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
-                updateUserProfile(data.name)
-                    .then(() => {
-                        console.log('User Profile Info Updated');
-                        reset();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'User Created Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate('/login');
-                    })
-                    .catch(error => console.log(error));
-            });
-    };
+    createUser(data.email, data.password)
+      .then(result => {
 
-    return (
-        <>
-            <Helmet>
-                <title>KNOT | SIGN</title>
-            </Helmet>
+        const loggedUser = result.user;
+        console.log(loggedUser);
 
-            <div className="flex max-w-7xl mx-auto h-screen items-center">
-                <div className="w-1/2">
-                    <img src={signImage} className="h-full w-full" alt="" />
-                </div>
-                <div className="w-1/2  grid place-items-center">
-                    <div className="bg-primary/5 w-full max-w-sm rounded-lg grid place-items-center p-10">
-                        <h1 className="mb-10 font-medium text-2xl">Sign up</h1>
-                        {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 w-full">
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="email">Name</label>
-                                <input
-                                    type="text"
-                                    id="name"
-                                    {...register("name", { required: true })}
-                                    className="w-full rounded-md"
-                                />
-                                {errors.name && <span className='text-red-600'>Name is required</span>}
-                            </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="email">Email</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    {...register("email", { required: true })}
-                                    className="w-full rounded-md"
-                                />
-                                {errors.email && <span className='text-red-600'>Email is required</span>}
-                            </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    className="w-full rounded-md"
-                                    {...register("password", { required: true, minLength: 6, maxLength: 20 })}
-                                />
-                                {errors.password && <span className='text-red-600'>Password is required</span>}
-                            </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="confirm-password">Confirm Password</label>
-                                <input
-                                    type="password"
-                                    id="confirm-password"
-                                    className="w-full rounded-md"
-                                    {...register("confirmPassword", {
-                                        required: true,
-                                        validate: value =>
-                                            value === getValues("password") || "Passwords do not match"
-                                    })}
-                                />
-                                {errors.confirmPassword && <span className='text-red-600'>Passwords do not match</span>}
-                            </div>
-                            <div className="!mt-8 ">
-                                <button
-                                    type="submit"
-                                    className="btn btn-primary w-full disabled:bg-gray-300 disabled:cursor-not-allowed"
-                                >
-                                    Sign up
-                                </button>
-                            </div>
-                            <div>
-                                <p>
-                                    Already have an account?{' '}
-                                    <Link to="/login"
-                                        className="text-primary hover:underline cursor-pointer"
-                                    >
-                                        Login Now
-                                    </Link>
-                                </p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            const saveUser = { name: data.name, email: data.email }
+            fetch('http://localhost:5000/users', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(saveUser)
+            })
+              .then(res => res.json())
+              .then(data => {
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User created successfully.',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  navigate('/');
+                }
+              })
+          })
+          .catch(error => console.log(error))
+      })
+  };
+  return (
+    <>
+      <Helmet>
+        <title>KNOT | Sign Up</title>
+      </Helmet>
+      <div className="flex max-w-7xl h-screen items-center mx-auto">
+        <div className="hidden md:block w-1/2 h-full">
+          <img src={signUpImg} alt="Sign Up" className="object-cover w-full h-full" />
+        </div>
+        <div className="w-full md:w-1/2 h-full flex justify-center items-center">
+          <div className="md:max-w-md w-full px-4 py-8 bg-white shadow-lg rounded-lg">
+            <h1 className="text-3xl font-semibold text-center mb-4">Sign Up</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="relative">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  {...register("name", { required: true })}
+                  name="name"
+                  placeholder="Name"
+                  className="input input-bordered w-full mt-1"
+                />
+                {errors.name && <span className="text-red-600">Name is required</span>}
+              </div>
+              <div className="relative">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                  name="email"
+                  placeholder="Email"
+                  className="input input-bordered w-full mt-1"
+                />
+                {errors.email && <span className="text-red-600">Email is required</span>}
+              </div>
+              <div className="relative">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                  })}
+                  placeholder="Password"
+                  className="input input-bordered w-full mt-1"
+                />
+                {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
+                {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
+                {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                </label>
+              </div>
+              <div className="form-control mt-6">
+                <input className="btn btn-primary" type="submit" value="Sign Up" />
+              </div>
+            </form>
+            <div className="mt-4">
+              <p>Already have an account?   <Link to="/login" className="text-sm text-primary hover:underline">
+                Login Now
+              </Link></p>
+              <SocialLogin></SocialLogin>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default SignUp;
