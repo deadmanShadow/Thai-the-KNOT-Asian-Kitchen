@@ -4,9 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../../Providers/AuthProvider";
 import { FaShoppingCart } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import useCart from "../../../../../hooks/useCart";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
 
     const handleLogOut = () => {
         Swal.fire({
@@ -54,10 +56,10 @@ const NavBar = () => {
                         <li><Link to="/secret">Secret</Link></li>
                     </button>
                     <li>
-                        <Link to="/">
+                        <Link to="/dashboard/mycart">
                             <button className="btn btn-sm ms-2">
                                 <FaShoppingCart />
-                                <div className="badge badge-secondary">+0</div>
+                                <div className="badge badge-secondary">+{cart?.length || 0}</div>
                             </button>
                         </Link>
                     </li>
